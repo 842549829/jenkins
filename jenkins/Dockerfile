@@ -1,12 +1,12 @@
-#基于 `microsoft/dotnet:1.0.0-core` 来构建我们的镜像
-FROM microsoft/dotnet:2.2-aspnetcore-runtime AS base
-
-
+FROM microsoft/aspnetcore:latest
 WORKDIR /app
+COPY ./ .
 
 
-COPY ./publish /app
+RUN cd ./jenkins \
+    && dotnet restore \
+    && dotnet build
 
-#使用`dotnet HelloWebApp.dll`来运行应用程序
+WORKDIR /app/jenkins
 
-CMD ["dotnet", "jenkins.dll", "urls", "http://0.0.0.0:5010"]
+CMD ["dotnet", "jenkins.dll", "urls", "http://0.0.0.0:5012"]
