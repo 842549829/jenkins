@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  jenkins:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80"
